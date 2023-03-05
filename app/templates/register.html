@@ -15,7 +15,13 @@
 	<div class="col-12">
 		<div class="sign">
 			<div class="sign__content">
-				<form action="#" class="sign__form">
+				<form methode="POST" action="{{ url_for('register') }}" novalidate>
+					{{ form.hidden_tag() }}
+					<div class="sign__group">
+						{{ form.user_name(class="sign__input") }}
+					</div>
+				</form>
+				<!-- <form action="#" class="sign__form">
 					<a href="index.html" class="sign__logo">
 						<img src="img/logo.svg" alt="">
 					</a>
@@ -48,7 +54,7 @@
 					</div>
 
 					<span class="sign__text">حساب دارید ؟ <a href="signin.html">وارد شوید!</a></span>
-				</form>
+				</form> -->
 			</div>
 		</div>
 	</div>

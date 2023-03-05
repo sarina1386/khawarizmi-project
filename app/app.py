@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for
 from flask_login import LoginManager, login_user, current_user, logout_user
 from models import db, Users
 from flask_migrate import Migrate
+from forms import *
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -26,7 +27,8 @@ def home():
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    form = RegisterForm()
+    return render_template('register.html', form=form)
 
 @app.route('/login')
 def login():

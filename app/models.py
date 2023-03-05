@@ -7,6 +7,7 @@ db = SQLAlchemy()
 class Users(db.Model, UserMixin):
     uid = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(12), nullable=False, unique=True)
+    password = db.Column(db.String(12), nullable=False)
     fname = db.Column(db.String(12), nullable=False)
     lname = db.Column(db.String(12), nullable=False)
     grade = db.Column(db.Integer, default=9)
