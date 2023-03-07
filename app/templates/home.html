@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>بینـــگو</title>
+{% endblock %}
+
+{% block contetnt %}
+<!-- slider -->
+<section class="row">
+	<div class="col-12">
+		<div class="hero owl-carousel" id="hero">
+			<div class="hero__slide" data-bg="{{ url_for('static', filename='img/home/slide1.jpg') }}">
+				<h1 class="hero__title">حالا وقتش رسید خودتو حسابی محک بزنی</h1>
+				<p class="hero__text">اگه از قوانین و نحوه بازی اطلاع نداری، پیشنهاد می کنیم اول راهنمای بازی رو مطالعه کنی.</p>
+				<div class="hero__btns">
+					<a href="#" class="hero__btn hero__btn--red">راهنمای بازی</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end slider -->
+
+<!-- select game -->
+
+<!-- title -->
+<section class="row">
+	<div class="col-12">
+		<div class="main__title">
+			<h2>انتخاب بازی</h2>
+		</div>
+	</div>
+</section>
+<!-- end title -->
+
+<!-- select grade -->
+<section class="row row--grid" id="choose-grade">
+	<div class="col-12">
+		<div class="main__title">
+			<h2>اول پایه تحصیلی مدنظرت رو انتخاب کن</h2>
+		</div>
+	</div>
+
+	<div class="col-12">
+		<div class="main__carousel-wrap">
+			<div class="main__carousel main__carousel--events owl-carousel" id="events">
+				<div class="event" data-bg="{{ url_for('static', filename='img/events/event1.jpg') }}">
+					<button class="event__ticket" id="grade7">انتخاب</button>
+					<h3 class="event__title">هفتم</h3>
+				</div>
+				<div class="event" data-bg="{{ url_for('static', filename='img/events/event1.jpg') }}">
+					<button class="event__ticket" id="grade8">انتخاب</button>
+					<h3 class="event__title">هشتم</h3>
+				</div>
+				<div class="event" data-bg="{{ url_for('static', filename='img/events/event1.jpg') }}">
+					<button class="event__ticket" id="grade9">انتخاب</button>
+					<h3 class="event__title">نهم</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end select grade -->
+
+<!-- select lessen & section -->
+<section dir="rtl" class="row row--grid d-none">
+	<div class="col-12">
+		<div class="main__title main__title--page">
+			<h2>حالا درس و فصل رو انتخاب کن</h2>
+		</div>
+	</div>
+	<div class="col-12 d-flex flex-wrap">
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+			<div class="release">
+				<div class="release__content">
+					<div class="release__cover">
+						<img src="{{ url_for('static', filename='img/covers/TANHAM NAZAR.jpg') }}" alt="">
+					</div>
+					<div class="release__stat">
+						<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.211,3.39H2.788c-0.22,0-0.4,0.18-0.4,0.4v9.614c0,0.221,0.181,0.402,0.4,0.402h3.206v2.402c0,0.363,0.429,0.533,0.683,0.285l2.72-2.688h7.814c0.221,0,0.401-0.182,0.401-0.402V3.79C17.612,3.569,17.432,3.39,17.211,3.39M16.811,13.004H9.232c-0.106,0-0.206,0.043-0.282,0.117L6.795,15.25v-1.846c0-0.219-0.18-0.4-0.401-0.4H3.189V4.19h13.622V13.004z"/></svg> 8 فصل</span>
+					</div>
+				</div>
+	
+				<div class="release__list">
+					<ul class="main__list main__list--playlist main__list--dashbox">
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل اول</a></h4>
+								<span><a href="artist.html">هندسه</a></span>
+							</div>
+						</li>
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل دوم</a></h4>
+								<span><a href="artist.html">ضرب</a></span>
+							</div>
+						</li>
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل سوم</a></h4>
+								<span><a href="artist.html">توان</a></span>
+							</div>
+						</li>
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل چهارم</a></h4>
+								<span><a href="artist.html">جبر</a></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+			<div class="release">
+				<div class="release__content">
+					<div class="release__cover">
+						<img src="{{ url_for('static', filename='img/covers/TANHAM NAZAR.jpg') }}" alt="">
+					</div>
+					<div class="release__stat">
+						<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.211,3.39H2.788c-0.22,0-0.4,0.18-0.4,0.4v9.614c0,0.221,0.181,0.402,0.4,0.402h3.206v2.402c0,0.363,0.429,0.533,0.683,0.285l2.72-2.688h7.814c0.221,0,0.401-0.182,0.401-0.402V3.79C17.612,3.569,17.432,3.39,17.211,3.39M16.811,13.004H9.232c-0.106,0-0.206,0.043-0.282,0.117L6.795,15.25v-1.846c0-0.219-0.18-0.4-0.401-0.4H3.189V4.19h13.622V13.004z"/></svg> 8 فصل</span>
+					</div>
+				</div>
+	
+				<div class="release__list">
+					<ul class="main__list main__list--playlist main__list--dashbox">
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل اول</a></h4>
+								<span><a href="artist.html">هندسه</a></span>
+							</div>
+						</li>
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل دوم</a></h4>
+								<span><a href="artist.html">ضرب</a></span>
+							</div>
+						</li>
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل سوم</a></h4>
+								<span><a href="artist.html">توان</a></span>
+							</div>
+						</li>
+						<li class="single-item">
+							<div class="single-item__title">
+								<h4><a href="#">فصل چهارم</a></h4>
+								<span><a href="artist.html">جبر</a></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end select lessen & section -->
+
+<!-- end select game -->
+
+{% endblock %}
