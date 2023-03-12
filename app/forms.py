@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, IntegerField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, IntegerField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import InputRequired, Length, EqualTo
 
 class RegisterForm(FlaskForm):
@@ -52,3 +52,32 @@ class LoginForm(FlaskForm):
     )
     remember_me = BooleanField('مرا بخاطر بسپار')
     submit = SubmitField('ورود')
+
+
+
+class AddLessonForm(FlaskForm):
+    lesson_name = StringField(
+        'نام درس', 
+        validators=[InputRequired(message='نام درس نمی تواند خالی باشد')], 
+        render_kw={'placeholder': 'نام درس'}
+    )
+    grade = IntegerField(
+        'پایه تحصیلی درس',  
+        validators=[InputRequired(message='پایه تحصیلی درس نمی تواند خالی باشد')], 
+        render_kw={'placeholder': 'پایه تحصیلی درس'}
+    )
+    image = StringField(
+        'تصویر درس',  
+        render_kw={'placeholder': 'تصویر درس (مانند: riazi7)'}
+    )
+    sections_num = IntegerField(
+        'تعداد فصول',  
+        validators=[InputRequired(message=' تعداد فصول درس نمی تواند خالی باشد')], 
+        render_kw={'placeholder': 'تعداد فصول'}
+    )
+    sections_info = TextAreaField(
+        'عنوان هر فصل', 
+        validators=[InputRequired(message='عنوان هر فصل')], 
+        render_kw={'placeholder': 'عنوان هرفصل ( مقادیر را با - جدا کنید)'}
+    )
+    submit = SubmitField('ثبت و اضافه کردن درس')

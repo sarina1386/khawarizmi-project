@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>بینـــگو | اضافه کردن درس</title>
+{% endblock %}
+
+{% block contetnt %}
+<div class="row row--grid">
+	<!-- registration form -->
+	<div class="col-12">
+		<div class="sign">
+			<div class="sign__content">
+				<form method="POST" action="{{ url_for('add_lesson') }}" class="sign__form" novalidate>
+					{{ form.hidden_tag() }}
+					<a href="{{ url_for('root') }}" class="sign__logo">
+						<img src="{{ url_for('static', filename='img/logo.svg') }}" alt="">
+					</a>
+					<div class="sign__group">
+						{{ form.lesson_name(class="sign__input") }}
+						{% for error in form.lesson_name.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.grade(class="sign__input") }}
+						{% for error in form.grade.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.image(class="sign__input") }}
+					</div>
+					<div class="sign__group">
+						{{ form.sections_num(class="sign__input") }}
+						{% for error in form.sections_num.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.sections_info(class="sign__input") }}
+						{% for error in form.sections_info.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					{{ form.submit(class="sign__btn") }}
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- end registration form -->
+</div>
+{% endblock %}
