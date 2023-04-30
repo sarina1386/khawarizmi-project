@@ -1,54 +1,118 @@
 {% extends 'base.html' %}
 
-{% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-{% endblock %}
-
 {% block title %}
 <title>بینـــگو</title>
 {% endblock %}
 
 {% block contetnt %}
+<input type="hidden" class="d-none" id="quiz-id" value="{{ quiz_id }}">
+{% if has_quiz %}
+<!-- Question Button Start-->
 <section>
+    <div class="question-container mt-2 d-flex flex-column justify-content-center align-items-center">
+        <p class="text-right text-white mt-1" id="ready-msg">هروقت آماده بودی دکمه زیر رو فشار بده</p>
+        <button class="btn btn-primary mt-2 w-50" id="show-question">نمایش سوال</button>
+
+        <div class="col-12 question-text timer d-none">0{{ time }}:00</div>
+        <input type="hidden" class="d-none" id="timer-val" value="{{ time }}">
+        {% for question in questions %}
+        <div class="col-12 question-text d-none" id="q-{{ loop.index }}">{{ question }}</div>
+        <button class="btn btn-warning mt-4 d-none" id="n-{{ loop.index }}">سوال بعدی</button>
+        <p class="mt-2 text-success d-none" id="pass-{{ loop.index }}">آفرین! فوق العاده بود</p>
+        <p class="mt-2 text-danger d-none" id="failed-{{ loop.index }}">آخ آخ! عیب نداره، باید بیشتر دقت کنی</p>
+        <p class="mt-2 text-danger d-none" id="timesup-{{ loop.index }}">وقت تموم شد که!</p>
+        {% endfor %}
+
+        <h2 class="text-right text-primary mt-1 d-none" id="end-msg">تموم شد، خسته نباشی</h2>
+        <p class="text-right text-white mt-1 d-none" id="star-msg">کارت عالی بود، موفق شدی 3 ستاره بگیری</p>
+        <a href="{{ url_for('home') }}" class="btn btn-success mt-2 w-50 d-none" id="back-home">بازگشت به صفحه اصلی</a>
+    </div>
+</section>
+<!-- Question Button End-->
+<!-- Answer Start-->
+<section>
+    <hr class="border-top border-secondary">
     <div class="container bingo-card">
         <div class="row bingo-rows">
             <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 1</button>
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-1">{{ answers[0] }}</button>
             </div>
             <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 2</button>
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-2">{{ answers[1] }}</button>
             </div>
             <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 3</button>
-            </div>
-        </div>
-        <div class="row bingo-rows">
-            <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 4</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary btn-block f-small" disabled>موفق باشی</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 6</button>
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-3">{{ answers[2] }}</button>
             </div>
         </div>
         <div class="row bingo-rows">
             <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 7</button>
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-4">{{ answers[3] }}</button>
             </div>
             <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 8</button>
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-5">{{ answers[4] }}</button>
             </div>
             <div class="col">
-                <button class="btn btn-outline-primary btn-block" data-toggle="button" aria-pressed="false">Item 9</button>
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-6">{{ answers[5] }}</button>
+            </div>
+        </div>
+        <div class="row bingo-rows">
+            <div class="col">
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-7">{{ answers[6] }}</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-8">{{ answers[7] }}</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-primary btn-block ans-btn" aria-pressed="false" id="a-9">{{ answers[8] }}</button>
             </div>
         </div>
     </div>
 </section>
+<!-- Answer End-->
+{% else %}
+<section dir="rtl" class="row row--grid">
+	<div class="col-12 d-flex flex-wrap">
+		<div class="col-12">
+			<div class="page-404">
+				<div class="page-404__wrap">
+					<div class="page-404__content">
+						<h1 class="page-404__title">متاسفیم!</h1>
+						<p class="page-404__text mt-5">برای فصل موردنظر شما سوالی تعریف نشده است</p>
+						<a href="{{ url_for('home') }}" class="page-404__btn">بازگشت به صفحه اصلی</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endif %}
+
+{% if is_seen %}
+<!-- Seen level Modal Start -->
+<div class="modal fade" id="passedModal" tabindex="-1" role="dialog" aria-labelledby="passedModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passedModalLabel">مرحله تکراری</h5>
+            </div>
+            <div class="modal-body">
+                <p>شما این بازی را برای این درس و فصل، قبلا انجام داده بودید.</p>
+                <p>در تلاش گذشته، شما از این مرحله {{star}} ستاره بدست آورده بودید</p>
+                <p>دقت کنید با بازی مجدد این مرحله عملکرد فعلی شما جایگزین عملکرد قبلیتان می شود</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">می پذیرم، بریم بازی کنیم</button>
+                <a href="{{ url_for('home') }}" type="button" class="btn btn-primary">پشیمان شدم، بازگشت</a>
+            </div>
+        </div>
+	</div>
+</div>
+<!-- Seen level Modal End -->
+{% endif %}
+
 {% endblock %}
 
 
 {% block scripts %}
-
+<script src="{{ url_for('static', filename='js/play-game.js') }}"></script>
 {% endblock %}

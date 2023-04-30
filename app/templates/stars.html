@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>بینـــگو</title>
+{% endblock %}
+
+{% block contetnt %}
+<div class="row row--grid">
+    <!-- title -->
+    <div class="col-12">
+        <div class="main__title main__title--page">
+            <h1>جدول بازیکنان</h1>
+        </div>
+    </div>
+    <!-- end title -->
+</div>
+
+<section dir="rtl" class="row row--grid">
+    <div class="col-12">
+        <div class="row row--grid">
+            <div class="col-4">
+                <ul class="main__list">
+                    {% for player in users %}
+                    <li class="single-item">
+                        <span class="single-item__number">{{ loop.index }}</span>
+                        <div class="single-item__title">
+                            <h4 class="mb-1">{{ player.fname + ' ' + player.lname}}</h4>
+                            <span>{{ player.school }}</span>
+                        </div>
+                        <span class="single-item__time">{{ player.score }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

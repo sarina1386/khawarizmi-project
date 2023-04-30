@@ -5925,7 +5925,7 @@ input{
 /*==============================
 	Modal
 ==============================*/
-.modal {
+/* .modal {
   position: relative;
   display: block;
   background-color: #16151a;
@@ -6017,7 +6017,7 @@ input{
     top: 37px;
     left: 35px;
   }
-}
+} */
 .mfp-bg {
   background: rgba(34,34,39,0.75)
 }

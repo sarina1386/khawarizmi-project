@@ -19,6 +19,7 @@ class Users(db.Model, UserMixin):
     last_login = db.Column(db.DateTime, default=datetime.utcnow)
     is_admin = db.Column(db.Integer, default=0)
     is_active = db.Column(db.Integer, default=1)
+    seen_level = db.Column(db.String(100), default='[]')
     
     def get_id(self):
         return self.uid
@@ -39,5 +40,21 @@ class Lessons(db.Model):
         return self.lid
     
     def __repr__(self):
-        return f'User {self.lid} - {self.name}'
+        return f'Lesson {self.lid} - {self.name}'
 
+
+class Quiz(db.Model):
+    qid = db.Column(db.Integer, primary_key=True)
+    grade = db.Column(db.Integer, default=9)
+    lesson = db.Column(db.Integer, default=1)
+    lesson_id = db.Column(db.Integer, default=1)
+    session = db.Column(db.Integer, default=1)
+    questions = db.Column(db.String(5000), default='[]')
+    answers = db.Column(db.String(1000), default='[]')
+    time = db.Column(db.Integer, default=1)
+
+    def get_id(self):
+        return self.qid
+    
+    def __repr__(self):
+        return f'Quiz {self.qid} - for lesson {self.lesson} and session {self.session}'

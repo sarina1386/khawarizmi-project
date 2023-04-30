@@ -43,24 +43,21 @@
 				</div>
 			</div>
 
-			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-				<div class="event" data-bg="{{ url_for('static', filename='img/events/event1.jpg') }}">
-					<button class="event__ticket">انتخاب</button>
-					<h3 class="event__title">نهم</h3>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 grade">
+				<div class="event" data-bg="{{ url_for('static', filename='img/grade/9.jpg') }}">
+					<h3 class="event__title d-none">نهم</h3>
 				</div>
 			</div>
 
-			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-				<div class="event" data-bg="{{ url_for('static', filename='img/events/event1.jpg') }}">
-					<button class="event__ticket">انتخاب</button>
-					<h3 class="event__title">هشتم</h3>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 grade">
+				<div class="event" data-bg="{{ url_for('static', filename='img/grade/8.jpg') }}">
+					<h3 class="event__title d-none">هشتم</h3>
 				</div>
 			</div>
 
-			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-				<div class="event" data-bg="{{ url_for('static', filename='img/events/event1.jpg') }}">
-					<button class="event__ticket">انتخاب</button>
-					<h3 class="event__title">هفتم</h3>
+			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 grade">
+				<div class="event" data-bg="{{ url_for('static', filename='img/grade/7.jpg') }}">
+					<h3 class="event__title d-none">هفتم</h3>
 				</div>
 			</div>
 		</div>
@@ -72,7 +69,10 @@
 <section dir="rtl" class="row row--grid d-none" id="choose-lesson">
 	<div class="col-12">
 		<div class="main__title main__title--page">
-			<h2>حالا درس و فصل رو انتخاب کن</h2>
+			<!-- if just math, uncoment blow line -->
+			<h2>حالا فصل رو انتخاب کن</h2>
+			<!-- if for all lessons, uncoment blow line -->
+			<!-- <h2>حالا درس و فصل رو انتخاب کن</h2> -->
 		</div>
 	</div>
 	<div class="col-12 d-flex flex-wrap" id="lesson-card">

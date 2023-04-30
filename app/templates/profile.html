@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>بینـــگو</title>
+{% endblock %}
+
+{% block contetnt %}
+<div class="row row--grid">
+    <!-- title -->
+    <div class="col-12">
+        <div class="main__title main__title--page">
+            <h1>پروفایل من</h1>
+        </div>
+    </div>
+    <!-- end title -->
+</div>
+
+<div dir="rtl" class="row row--grid">
+    <div class="col-12">
+        <div class="profile">
+            <div class="profile__user">
+                <div class="profile__avatar">
+                    <img src="img/avatar.svg" alt="">
+                </div>
+                <div class="profile__meta">
+                    <h3>{{ user.fname + ' ' + user.lname }}</h3>
+                </div>
+            </div>
+
+            <!-- tabs nav -->
+            <ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">داشبورد</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">تنظیمات</a>
+                </li>
+            </ul>
+            <!-- end tabs nav -->
+
+            <a href="{{ url_for('logout') }}" class="profile__logout" type="button">
+                <span>خارج شوید</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z"/></svg>
+            </a>
+        </div>
+
+        <!-- content tabs -->
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
+                <div class="row row--grid">
+                    <div class="col-12">
+                        <div class="stats">
+                            <span>امتیاز من</span>
+                            <p><b>{{ user.score }}</b></p>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6,11a1,1,0,1,0,1,1A1,1,0,0,0,6,11Zm12,0a1,1,0,1,0,1,1A1,1,0,0,0,18,11Zm2-6H4A3,3,0,0,0,1,8v8a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V8A3,3,0,0,0,20,5Zm1,11a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V8A1,1,0,0,1,4,7H20a1,1,0,0,1,1,1ZM12,9a3,3,0,1,0,3,3A3,3,0,0,0,12,9Zm0,4a1,1,0,1,1,1-1A1,1,0,0,1,12,13Z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-4" role="tabpanel">
+                <div class="row row--grid">
+                    <!-- details form -->
+                    <div class="col-12 ">
+                        <form method="POST" action="{{ url_for('profile') }}" class="sign__form sign__form--profile" novalidate>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4 class="sign__title">اطلاعات پروفایل</h4>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="sign__group">
+                                        {{ form.user_name.label(class="sign__label") }}
+                                        {{ form.user_name(class="sign__input", value=user.user_name) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="sign__group">
+                                        {{ form.first_name.label(class="sign__label") }}
+                                        {{ form.first_name(class="sign__input", value=user.fname) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="sign__group">
+                                        {{ form.last_name.label(class="sign__label") }}
+                                        {{ form.last_name(class="sign__input", value=user.lname) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="sign__group">
+                                        {{ form.grade.label(class="sign__label") }}
+                                        {{ form.grade(class="sign__input", value=user.grade) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="sign__group">
+                                        {{ form.school.label(class="sign__label") }}
+                                        {{ form.school(class="sign__input", value=user.school) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="sign__group">
+                                        {{ form.password.label(class="sign__label") }}
+                                        {{ form.password(class="sign__input") }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                    <div class="sign__group">
+                                        {{ form.re_password.label(class="sign__label") }}
+                                        {{ form.re_password(class="sign__input") }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    {{ form.submit(class="sign__btn") }}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end details form -->
+
+                </div>
+            </div>
+        </div>
+        <!-- end content tabs -->
+    </div>
+</div>
+
+{% endblock %}
+

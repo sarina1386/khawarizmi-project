@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>بینـــگو</title>
+{% endblock %}
+
+{% block contetnt %}
+<div class="row row--grid">
+    <!-- title -->
+    <div class="col-12">
+        <div class="main__title main__title--page">
+            <h1>ارتباط با ما</h1>
+        </div>
+    </div>
+    <!-- end title -->
+</div>
+
+<div dir="rtl" class="row row--grid">
+    <div class="col-12 col-md-12 col-lg-6 col-xl-8">
+        <form action="#" class="sign__form sign__form--contacts">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="sign__group">
+                        <input type="text" name="name" class="sign__input" placeholder="نام">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="sign__group">
+                        <input type="text" name="email" class="sign__input" placeholder="ایمیل">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="sign__group">
+                        <input type="text" name="subject" class="sign__input" placeholder="موضوع">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="sign__group">
+                        <textarea name="text" class="sign__textarea" placeholder="پیام خود را بنویسید . . ."></textarea>
+                    </div>
+                </div>
+
+                <div class="col-12 col-xl-3">
+                    <a href="{{ url_for('root') }}"  class="sign__btn">ارسال</a>
+                </div>
+            </div>
+        </form>	
+    </div>
+
+    <div class="col-12 col-md-12 col-lg-6 col-xl-4">
+        <div class="main__title main__title--sidebar">
+            <h2>اطلاعات تماس</h2>
+            <p>آدرس: مشهد-خ احمدآباد</p>
+        </div>
+        <ul class="contacts__list">
+            <li dir="ltr"><a href="tel:+18092345678">0512314567</a></li>
+            <li dir="ltr"><a href="tel:+18092345678">09151234567</a></li>
+            <li dir="ltr"><a href="mailto:support@volna.template">ashna@info.com</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+

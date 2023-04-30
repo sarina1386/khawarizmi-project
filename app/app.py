@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, request, abort, jsonify, session
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from flask_bcrypt import Bcrypt
-from models import db, Users, Lessons
+from models import db, Users, Lessons, Quiz
 from flask_migrate import Migrate
 from forms import *
 from datetime import datetime
@@ -25,7 +25,6 @@ def load_user(user_id):
 
 bcrypt = Bcrypt(app)
 
-# 
 @app.route('/')
 def root():
     if current_user.is_authenticated:
@@ -139,6 +138,52 @@ def add_lesson():
 
     return render_template('add-lesson.html', user=current_user, form=form)
 
+@app.route('/admin/add-quiz', methods=['GET', 'POST'])
+@login_required
+def add_quiz():
+    if not current_user.is_admin:
+        abort(403, 'You have no premission')
+    
+    form = AddQuizForm()
+    if form.validate_on_submit():
+        lesson_name = form.lesson_name.data
+        grade = form.grade.data
+        lesson = Lessons.query.filter(Lessons.name==lesson_name).filter(Lessons.grade==grade).first()
+        lesson_id = lesson.lid
+        if lesson_name == 'ریاضی':
+            lesson_type = 1
+        elif lesson_name == 'علوم':
+            lesson_type = 2  
+        elif lesson_name == 'ادبیات':
+            lesson_type = 3  
+        session = form.session.data
+        questions = [
+            form.q1.data, form.q2.data, form.q3.data,
+            form.q4.data, form.q5.data, form.q6.data,
+            form.q7.data, form.q8.data, form.q9.data
+        ]
+        answers = [
+            form.a1.data, form.a2.data, form.a3.data,
+            form.a4.data, form.a5.data, form.a6.data,
+            form.a7.data, form.a8.data, form.a9.data
+        ]
+        time = form.time.data
+        
+        new_quiz = Quiz(
+            grade=grade,
+            lesson_id=lesson_id,
+            lesson=lesson_type,
+            session=session,
+            questions=json.dumps(questions),
+            answers=json.dumps(answers),
+            time=time
+        )
+        db.session.add(new_quiz)
+        db.session.commit()
+        return redirect(url_for('home'))
+    
+    return render_template('add-quiz.html', user=current_user, form=form)
+
 @app.route('/api/get-lessons', methods=['POST'])
 @login_required
 def get_lesson():
@@ -171,12 +216,153 @@ def game():
 
         if not data:
             return redirect(url_for('home'))
-        print(data['grade'])
-        print('****************')
-        return render_template('game.html', user=current_user)
+        
+        grade = int(data['grade'])
+        lesson = int(data['lesson'])
+        level = int(data['session'])
 
+        quiz_id = 0
+        has_quiz = False
+        questions = []
+        answers = []
+        time = 0
+        is_seen = False
+        star = 0
+        quiz = Quiz.query.filter_by(grade=grade).filter_by(lesson=lesson).filter_by(session=level).first()
+        if quiz:
+            quiz_id=quiz.qid
+            has_quiz = True
+            questions = json.loads(quiz.questions)
+            answers = json.loads(quiz.answers)
+            time = quiz.time
+            seen_levels = json.loads(current_user.seen_level)
+            if seen_levels:
+                for game in seen_levels:
+                    if (game[0] == grade) and (game[1] == lesson) and (game[2] == level):
+                        is_seen = True
+                        star = game[3]
 
+        return render_template(
+            'game.html',
+            user=current_user,
+            has_quiz=has_quiz,
+            questions=questions,
+            answers=answers,
+            time=time,
+            quiz_id=quiz_id,
+            is_seen=is_seen,
+            star=star
+        )
 
+@app.route('/api/get-result', methods=['POST'])
+@login_required
+def get_result():
+    data = request.get_json()
+    star = int(data['star'])
+
+    quiz = Quiz.query.get(int(data['qid']))
+    grade = quiz.grade
+    lesson = quiz.lesson
+    level = quiz.session
+    update_score = False
+    seen_levels = json.loads(current_user.seen_level)
+    game_played = len(seen_levels)
+    if seen_levels:
+        for game in seen_levels:
+            if (game[0] == grade) and (game[1] == lesson) and (game[2] == level):
+                if game[3] == star:
+                    update_score = False
+                else:
+                    update_score = False
+                    if game[3] < star:
+                        current_user.score = current_user.score + (star - game[3])
+                    else:
+                        current_user.score = current_user.score - (game[3] - star)
+                    game[3] = star
+            else:
+                game_played -= 1
+        if game_played < 1:
+            update_score = True
+            seen_levels.append([grade, lesson ,level, star])
+    else:
+        update_score = True
+        seen_levels.append([grade, lesson ,level, star])
+
+    current_user.seen_level = json.dumps(seen_levels)
+    if update_score:
+        current_user.score += star
+
+    db.session.commit()
+    return jsonify({'status': 'ok'})
+
+@app.route('/my-profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    user = current_user
+    form = UpdateUserForm()
+    if form.validate_on_submit():
+        update_db = False
+        user_name = form.user_name.data
+        if user_name:
+            update_db = True
+            user.user_name = user_name
+        fname = form.first_name.data
+        if fname:
+            update_db = True
+            user.fname = fname
+        lname = form.last_name.data
+        if lname:
+            update_db = True
+            user.lname = lname
+        grade = form.grade.data
+        if grade:
+            update_db = True
+            user.grade = grade
+        school = form.school.data
+        if school:
+            update_db = True
+            user.school = school
+        password = form.password.data
+        if password:
+            update_db = True
+            hashed_pass = bcrypt.generate_password_hash(password)
+            user.password = hashed_pass
+        
+        if update_db:
+            db.session.commit()
+        
+        return redirect(url_for('profile'))
+
+    return render_template(
+        'profile.html',
+        user=user,
+        form=form
+    )
+
+@app.route('/stars')
+def stars():
+    users = Users.query.order_by(Users.score.desc()).all()
+    return render_template(
+        'stars.html',
+        user=current_user,
+        users=users
+    )
+
+@app.route('/events')
+def events():
+    return render_template('index.html')
+
+@app.route('/textbooks')
+def textbooks():
+    return render_template('index.html')
+
+@app.route('/about-us')
+def about():
+    return render_template('about-us.html')
+
+@app.route('/contact-us')
+def contact():
+    return render_template('contact-us.html')
 
 if __name__ == "__main__":
     app.run()

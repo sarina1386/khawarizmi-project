@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>بینـــگو</title>
+{% endblock %}
+
+{% block contetnt %}
+<div class="row row--grid">
+    <!-- title -->
+    <div class="col-12">
+        <div class="main__title">
+            <h1>درباره ما</h1>
+
+            <p>بینگو یک متد جدید برای افزایش بهره وری دانش آموزان حین یادگیری دروس می باشد در این روش دانش آموز <a href="{{ url_for('home') }}">با انجام بازی</a> سختی های یادگیری را برای خود آسان می کند.</p>
+
+            <p>همچنین در این سایت از موسیقی با امواج بتا استفاده شده که باعث افزایش تمرکز دانش می شود.</p>
+            <h3 class="text-white mt-3">اما چرا ما؟</h3>
+        </div>
+    </div>
+    <!-- end title -->
+    <div class="col-12 col-lg-4">
+        <div class="step">
+            <span class="step__number">03</span>
+            <h3 class="step__title">رقابت سالم</h3>
+            <p class="step__text">دانش آموزان حین یادگیری درس ها باهم رقابتی سالم برای کسب رتبه های برتر در جدول برترین بازیکنان دارند.</p>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <div class="step">
+            <span class="step__number">02</span>
+            <h3 class="step__title">سوالات با کیفیت</h3>
+            <p class="step__text">در سوالات فصول مختلف برای هر بازی، بهترین سوالات از بهترین منابع انتخاب شده است.</p>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <div class="step">
+            <span class="step__number">01</span>
+            <h3 class="step__title">لذت یادگیری</h3>
+            <p class="step__text">بازی وار سازی یادگیری دروس مدرسه، باعث افزایش بهره وری دانش آموزان می شود.</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

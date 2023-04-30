@@ -1,3 +1,7 @@
+main{
+    min-height: 89% !important;
+}
+
 .bingo-card {
     margin-top: 50px;
     text-align: center;
@@ -9,4 +13,41 @@
 
 .f-small {
     font-size: small;
+}
+
+.mb-15 {
+    margin-bottom: 15rem;
+}
+
+.unused {
+    cursor: default;
+}
+
+.question-container {
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    border: 2px solid #222227; 
+    min-height: 205px !important;
+}
+
+.question-text {
+    text-align: center !important;
+    display: block;
+    width: 100%;
+    color: #f3f0f0;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.timer {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    max-width: 420px;
+    border-radius: 12px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    border: 2px solid #cc0bb2;
 }

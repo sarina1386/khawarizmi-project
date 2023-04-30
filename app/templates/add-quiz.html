@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>بینـــگو | اضافه کردن درس</title>
+{% endblock %}
+
+{% block contetnt %}
+<div class="row row--grid">
+	<!-- registration form -->
+	<div class="col-12">
+		<div class="sign">
+			<div class="sign__content">
+				<form method="POST" action="{{ url_for('add_quiz') }}" class="sign__form" novalidate>
+					{{ form.hidden_tag() }}
+					<a href="{{ url_for('root') }}" class="sign__logo">
+						<img src="{{ url_for('static', filename='img/logo.svg') }}" alt="">
+					</a>
+					<div class="sign__group">
+						{{ form.lesson_name(class="sign__input") }}
+						{% for error in form.lesson_name.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.grade(class="sign__input") }}
+						{% for error in form.grade.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.session(class="sign__input") }}
+						{% for error in form.session.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q1(class="sign__input") }}
+						{% for error in form.q1.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a1(class="sign__input") }}
+						{% for error in form.a1.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q2(class="sign__input") }}
+						{% for error in form.q2.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a2(class="sign__input") }}
+						{% for error in form.a2.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q3(class="sign__input") }}
+						{% for error in form.q3.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a3(class="sign__input") }}
+						{% for error in form.a3.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q4(class="sign__input") }}
+						{% for error in form.q4.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a4(class="sign__input") }}
+						{% for error in form.a4.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q5(class="sign__input") }}
+						{% for error in form.q5.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a5(class="sign__input") }}
+						{% for error in form.a5.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q6(class="sign__input") }}
+						{% for error in form.q6.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a6(class="sign__input") }}
+						{% for error in form.a6.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q7(class="sign__input") }}
+						{% for error in form.q7.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a7(class="sign__input") }}
+						{% for error in form.a7.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q8(class="sign__input") }}
+						{% for error in form.q8.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a8(class="sign__input") }}
+						{% for error in form.a8.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.q9(class="sign__input") }}
+						{% for error in form.q9.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<div class="sign__group">
+						{{ form.a9(class="sign__input") }}
+						{% for error in form.a9.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					<hr>
+					<div class="sign__group">
+						{{ form.time(class="sign__input") }}
+						{% for error in form.time.errors %}
+						<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					</div>
+					{{ form.submit(class="sign__btn") }}
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- end registration form -->
+</div>
+{% endblock %}

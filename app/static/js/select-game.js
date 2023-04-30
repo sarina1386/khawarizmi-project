@@ -17,8 +17,7 @@ else
 }
 
 function main() {
-    let grades = document.querySelector('#grades');
-    let gradeButs = grades.querySelectorAll('button');
+    let gradeButs = document.querySelectorAll('.grade');
     
     for(let i = 0; i < gradeButs.length; i++) {
         gradeButs[i].addEventListener('click', chooseGrade);
@@ -91,7 +90,10 @@ function chooseLesson(grade) {
 
     lessonCard.innerHTML = '';
     for(let i = 0; i < detail.length; i++) {
-        let section = '<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">'
+        // if just math, uncoment blow line
+        let section = '<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">'
+        // if for all lessons, uncoment blow line
+        // let section = '<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">'
         section += '<div class="release">'
         section += '<div class="release__content">'
         section += '<div class="release__cover">'
